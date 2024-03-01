@@ -3,7 +3,8 @@ using Academy_2024.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
+//calculator nugetpackage lertehozasa
+//Course controller alap CRUD muveletekkel ()
 namespace Academy_2024.Controllers
 {
     [Route("api/[controller]")]
