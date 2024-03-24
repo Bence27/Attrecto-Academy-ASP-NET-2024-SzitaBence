@@ -11,6 +11,8 @@ namespace Academy_2024.Services
 
         Task<List<UserDto>> GetAllAsync();
 
+        Task<UserDto> GetMeAsync(string token);
+
         Task<UserDto?> GetByIdAsync(int id);
 
         Task<User?> GetByEmailAsync(string email);

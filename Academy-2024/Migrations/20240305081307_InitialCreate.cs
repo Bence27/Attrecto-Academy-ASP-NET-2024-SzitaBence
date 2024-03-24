@@ -24,7 +24,13 @@ namespace Academy_2024.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.Id);
                 });
-        }
+            migrationBuilder.CreateIndex(
+               name: "IX_Users_Email",
+               table: "Users",
+               column: "Email",
+               unique: true);
+        
+    }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)

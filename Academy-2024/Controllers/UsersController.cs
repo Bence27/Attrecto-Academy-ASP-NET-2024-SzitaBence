@@ -26,6 +26,14 @@ namespace Academy_2024.Controllers
             return await _userService.GetAllAsync();
         }
 
+        [HttpGet("me")]
+        public async Task<ActionResult<UserDto>> GetMe()
+        {
+            string token = HttpContext.Request.Headers.Authorization.FirstOrDefault()?.Split(" ").Last()!;
+
+            return await _userService.GetMeAsync(token);
+        }
+
         // GET api/<UsersController>/5
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDto>> Get(int id)

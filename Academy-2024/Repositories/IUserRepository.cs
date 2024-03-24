@@ -1,4 +1,5 @@
-﻿using Academy_2024.Models;
+﻿using Academy_2024.Dtos;
+using Academy_2024.Models;
 
 namespace Academy_2024.Repositories
 {
@@ -9,6 +10,8 @@ namespace Academy_2024.Repositories
         Task<bool> DeleteAsync(int id);
 
         Task<List<User>> GetAllAsync();
+
+        Task<User> GetMeAsync(int id);
 
         Task<User?> GetByIdAsync(int id);
 

@@ -1,5 +1,6 @@
 ﻿using Academy_2024.Dtos;
 using Academy_2024.Models;
+using Bcrypt = BCrypt.Net.BCrypt;
 
 namespace Academy_2024.Services
 {
@@ -17,7 +18,7 @@ namespace Academy_2024.Services
         {
             var user = await _userService.GetByEmailAsync(loginDto.Email);
 
-            if (user is null || user.Password != loginDto.Password)
+            if (user is null || !Bcrypt.EnhancedVerify(loginDto.Password, user.Password))
             {
                 return null;
             }

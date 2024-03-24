@@ -1,6 +1,8 @@
 ﻿using Academy_2024.Dtos;
 using Academy_2024.Models;
 using Academy_2024.Repositories;
+using System.IdentityModel.Tokens.Jwt;
+using Bcrypt = BCrypt.Net.BCrypt;
 
 namespace Academy_2024.Services
 {
@@ -25,6 +27,17 @@ namespace Academy_2024.Services
             var users = await _userRepository.GetAllAsync();
 
             return users.Select(MapToDto).ToList();
+        }
+
+        public async Task<UserDto> GetMeAsync(string token)
+        {
+            var handler = new JwtSecurityTokenHandler();
+            var jwtSecurityToken = handler.ReadJwtToken(token);
+            var sub = jwtSecurityToken.Claims.First(claim => claim.Type == JwtRegisteredClaimNames.Sub);
+            int id = Convert.ToInt32(sub.Value.ToString());
+            var user = await _userRepository.GetMeAsync(id);
+
+            return MapToDto(user);
         }
 
         public async Task<UserDto?> GetByIdAsync(int id)
@@ -69,7 +82,7 @@ namespace Academy_2024.Services
             FirstName = userDto.FirstName,
             LastName = userDto.LastName,
             Email = userDto.Email,
-            Password = userDto.Password
+            Password = Bcrypt.EnhancedHashPassword(userDto.Password)
         };
     }
 }

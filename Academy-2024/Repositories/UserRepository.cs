@@ -1,4 +1,5 @@
 ﻿using Academy_2024.Data;
+using Academy_2024.Dtos;
 using Academy_2024.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,7 @@ namespace Academy_2024.Repositories
 
         public Task<List<User>> GetAllAsync() => _context.Users.ToListAsync();
 
+        public Task<User> GetMeAsync(int id) => _context.Users.FirstOrDefaultAsync(user => user.Id == id)!;
         public Task<User?> GetByIdAsync(int id) => _context.Users.FirstOrDefaultAsync(user => user.Id == id);
 
         public Task<User?> GetByEmailAsync(string email) => _context.Users.FirstOrDefaultAsync(user => user.Email == email);

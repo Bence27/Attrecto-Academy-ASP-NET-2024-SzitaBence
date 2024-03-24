@@ -29,7 +29,7 @@ namespace Academy_2024.Services
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtOptions.Key));
             var credentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
-            var expires = DateTime.Now.Add(new TimeSpan(0, 30, 0));
+            var expires = DateTime.Now.Add(new TimeSpan(24, 30, 0));
 
             var tokenDescriptor = new JwtSecurityToken(
                 _jwtOptions.Issuer,
